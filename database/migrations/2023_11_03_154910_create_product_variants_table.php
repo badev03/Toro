@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('value');
             $table->decimal('price', 8, 2);
             $table->integer('quantity');
+            
             $table->timestamps();
         });
     }

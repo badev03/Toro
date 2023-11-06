@@ -13,7 +13,9 @@
   
   <script src="{{asset('template/back-end/frest-html-admin-template/assets/vendor/js/menu.js')}}"></script>
   <!-- endbuild -->
-
+  <script src="{{asset('template/back-end/frest-html-admin-template/assets/vendor/libs/toastr/toastr.js')}}"></script>
+  <!-- Page JS -->
+  <script src="{{asset('template/back-end/frest-html-admin-template/assets/js/ui-toasts.js')}}"></script>
   <!-- Vendors JS -->
   
   

@@ -19,6 +19,8 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{asset('template/back-end/frest-html-admin-template/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('template/back-end/frest-html-admin-template/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+    <link rel="stylesheet" href="{{asset('template/back-end/frest-html-admin-template/assets/vendor/libs/toastr/toastr.css')}}" />
+    <link rel="stylesheet" href="{{asset('template/back-end/frest-html-admin-template/assets/vendor/libs/animate-css/animate.css')}}" />
 
 
     <!-- Page CSS -->

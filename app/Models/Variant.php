@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attribute_values extends Model
+class Variant extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        "attribute_id",
-        "value",
+        "product_id",
+        "variant_name",
+        "price",
+        "quantity",
+
+
     ];
 }
