@@ -1,133 +1,138 @@
 @extends('back-end.layouts.partials.master')
+
+
+
 @section('content')
+    {{-- <h4 class="py-3 breadcrumb-wrapper mb-4">
+        {{ $title ?? 'Admin Toro' }}
 
-
-    <h4 class="py-3 breadcrumb-wrapper mb-4">
-        Danh sách thương hiệu
     </h4>
     <div class="d-block mx-auto" style="float: end;">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenters">
-            Thêm
-        </button>
+        <a type="button" class="btn btn-primary" href="{{ route('brands.create') }}">Thêm mới</a>
     </div>
-
-
-    <table class="datatables-users table">
-        <thead class="table-light">
+    <br>
+    <table id="myTable" class="display">
+        <thead>
             <tr>
-
-                <th>Id</th>
+                <th>STT</th>
+                <th>Logo</th>
                 <th>Tên</th>
                 <th>Mô tả</th>
+                <th>Ngày tạo</th>
                 <th>Trạng thái</th>
                 <th>Hành Động</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($brands as $key => $item)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td><img src="{{ $item->logo }}" width="100px" alt=""></td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->description }}</td>
+                    <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                    <td>{{ $item->status == 1 ? 'Đã kích Hoạt' : 'Chưa kích hoạt' }}</td>
 
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
+                                    class="bx bx-dots-vertical-rounded"></i></button>
+                            <div class="dropdown-menu">
+                                <form action="{{ route('brands.destroy', ['brand' => $item->id]) }}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="dropdown-item"
+                                        onclick="return confirm('bạn có có chắc chắn muốn xóa không')">
+                                        <i class="bx bx-trash me-1"></i> Xóa
+                                    </button>
 
-            @if ($brands->isEmpty())
-                <td colspan="6" style="text-align: center">Không có dữ liệu</td>
-            @else
-                @foreach ($brands as $item)
-                    <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->description }}</td>
-                        <td>{{ $item->status == 1 ? 'Hoạt động' : 'Khóa' }}</td>
+                                </form>
 
-
-                        <td>
-                            {{-- xóa bằng form --}}
-                            <form action="{{ route('brands.destroy', $item->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Bạn có chắc chắn muốn xóa không?')"><i
-                                        class="fas fa-trash-alt"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            @endif
-
-
+                                <a class="dropdown-item" href="{{ route('brands.edit', ['brand' => $item->id]) }}"><i
+                                        class="bx bx-edit-alt me-1"></i> Sửa</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
-    </table>
-    <div class="col-lg-4 col-md-6">
-
-        <div class="mt-3">
-            <!-- Button trigger modal -->
+    </table> --}}
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="modalCenters" tabindex="-1" aria-hidden="true">
-
-                <div class="modal-dialog modal-dialog-centered" role="document">
-
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalCenterTitle">Thêm Thương Hiệu</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('brands.store') }}" method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="nameWithTitle" class="form-label">Tên</label>
-                                        <input type="text" id="nameWithTitle" class="form-control" placeholder="Nhập Tên"
-                                            name="name" @error('name') is-invalid @enderror>
-                                        @error('name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" name="description" placeholder="Nhập mô tả"
-                                            rows="3"></textarea>
-                                        @error('description')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="roleEx" class="form-label">Trạng Thái</label>
-
-                                        <select class="form-select" tabindex="0" id="roleEx" name="status">
-                                            <option value="1">Hoạt Động</option>
-                                            <option value="0">Khóa</option>
-
-                                        </select>
 
 
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-label-secondary"
-                                        data-bs-dismiss="modal">Đóng</button>
-                                    <button type="submit" class="btn btn-primary">Thêm mới</button>
-                                </div>
-                        </div>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="title-header option-title">
+                        <h5>{{ $title ?? '' }}</h5>
+                        <form class="d-inline-flex">
+                            <a href="{{route('brands.create')}}" class="align-items-center btn btn-theme d-flex">
+                                <i data-feather="plus-square"></i>Thêm mới
+                            </a>
                         </form>
                     </div>
 
-                    @if ($errors->any())
-                        <script>
-                            $(document).ready(function() {
-                                $('#modalCenters').modal('show');
-                            });
-                        </script>
-                    @endif
+                    <div class="table-responsive category-table">
+                        <table class="table all-package theme-table" id="table_id">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Logo</th>
+                                    <th>Tên</th>
+                                    <th>Mô tả</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($brands as $key => $item)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td><img src="{{ $item->logo }}" width="100px" alt=""></td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $item->status == 1 ? 'Đã kích Hoạt' : 'Chưa kích hoạt' }}</td>
+
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ route('brands.edit', ['brand' => $item->id]) }}">
+                                                        <i class="ri-pencil-line"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+
+                                                    <form action="{{ route('brands.destroy', ['brand' => $item->id]) }}"
+                                                        method="post">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="dropdown-item"
+                                                            onclick="return confirm('bạn có có chắc chắn muốn xóa không')">
+                                                            <i class="ri-delete-bin-line"></i>
+                                                        </button>
+
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-
             </div>
         </div>
     </div>
 @endsection
-@push('script')
-@endpush
+

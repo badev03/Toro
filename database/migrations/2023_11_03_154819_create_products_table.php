@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("sku");
             $table->foreignId('brand_id')->constrained('brands');
-            $table->foreignId('category_id')->constrained('categories');
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('slug');
-            $table->decimal('price', 8, 2);
+            $table->decimal('sale_price', 10, 2)->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->string('image')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();

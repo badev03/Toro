@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('slug');
+            $table->string('logo')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });
