@@ -177,8 +177,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row align-items-center">
-                                <label class="col-sm-3 col-form-label form-label-title">Số lượng</label>
+                            <div class="row align-items-center" >
+                                {{-- <label class="col-sm-3 col-form-label form-label-title">Số lượng</label>
                                 <div class="col-sm-9">
                                     <div class="bs-example">
                                         <input class="form-control" type="text" name="quantity"
@@ -187,10 +187,25 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
+                                <table class="table variation-table table-responsive-sm" style="display:none" id="table-variation">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Biến thể </th>
+                                    
+                                  
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="variation">
+
+                                    </tbody>
+                                </table>
+
+                                
                             </div>
-
-
+          
                         </div>
                     </div>
                 </div>

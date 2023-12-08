@@ -68,9 +68,9 @@ class ProductController extends Controller
     {
 
 
-
+        dd($request->all());
         $this->validateProduct($request);
-
+        
 
         try {
 
@@ -97,7 +97,10 @@ class ProductController extends Controller
                     $variant = new Variant();
                     $variant->product_id = $product->id;
                     $variant->attribute_value_id = $attribute_value_id;
-                    $variant->quantity = $request->quantity;
+                    // dùng vòng lặp để lưu số lượng vào bảng variant
+                    if (isset($request->quantity[$key])) {
+                        $variant->quantity = $request->quantity[$key];
+                    }
                     $variant->save();
                 }
             }
@@ -142,7 +145,7 @@ class ProductController extends Controller
             'name' => 'required|unique:products,name',
             'price' => 'required|numeric|min:0',
             'sale_price' => 'required|numeric|min:0',
-            'quantity' => 'required|numeric|min:1',
+            // 'quantity' => 'required|numeric|min:1',
             'category_id' => 'required',
             'sub_category_id' => 'required',
             'brand_id' => 'required',
@@ -160,9 +163,9 @@ class ProductController extends Controller
             'sale_price.required' => 'Giá khuyến mãi sản phẩm không được để trống',
             'sale_price.numeric' => 'Giá khuyến mãi sản phẩm phải là số',
             'sale_price.min' => 'Giá khuyến mãi sản phẩm phải lớn hơn 0',
-            'quantity.required' => 'Số lượng sản phẩm không được để trống',
-            'quantity.numeric' => 'Số lượng sản phẩm phải là số',
-            'quantity.min' => 'Số lượng sản phẩm phải lớn hơn 0',
+            // 'quantity.required' => 'Số lượng sản phẩm không được để trống',
+            // 'quantity.numeric' => 'Số lượng sản phẩm phải là số',
+            // 'quantity.min' => 'Số lượng sản phẩm phải lớn hơn 0',
             'category_id.required' => 'Danh mục sản phẩm không được để trống',
             'sub_category_id.required' => 'Danh mục con sản phẩm không được để trống',
             'brand_id.required' => 'Thương hiệu sản phẩm không được để trống',
