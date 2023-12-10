@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AuthenController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Client\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,4 +36,7 @@ route::prefix('admin')->group(function () {
 
     route::get('/create-product-basic', [ProductController::class, 'createProductbasic'])->name('createProductbasic');
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/{slug}', [HomeController::class, 'findProductByCategory'])->name('findProductByCategory');
 
